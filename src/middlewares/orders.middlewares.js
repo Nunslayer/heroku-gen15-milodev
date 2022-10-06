@@ -11,19 +11,19 @@ const orderExistsMiddleware = catchAsync(async (req, res, next) => {
     where: {
       id,
     },
-    include: {
-      model: Cart,
-      include: {
-        model: ProductsInCart,
-        where: {
-          status: "purchased",
-        },
-        // attributes:{exclude: []},
-        include: {
-          model: Product,
-        },
-      },
-    },
+    // include: {
+    //   model: Cart,
+    //   include: {
+    //     model: ProductsInCart,
+    //     where: {
+    //       status: "purchased",
+    //     },
+    //     // attributes:{exclude: []},
+    //     include: {
+    //       model: Product,
+    //     },
+    //   },
+    // },
   });
   if (!order) {
     return next(new AppError("Order not found", 404));
