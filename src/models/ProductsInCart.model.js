@@ -21,7 +21,6 @@ const ProductsInCart = db.define("productInCart", {
   },
   status: {
     type: DataTypes.STRING,
-    allowNull: false,
     defaultValue: "active",
   },
 });

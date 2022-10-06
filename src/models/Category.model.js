@@ -13,7 +13,6 @@ const Category = db.define("category", {
   },
   status: {
     type: DataTypes.STRING,
-    allowNull: false,
     defaultValue: "active",
   },
 });

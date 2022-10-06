@@ -1,9 +1,16 @@
 const { Router } = require("express");
+const {
+  setProductToCartController,
+  updateProductsInCartController,
+  deleteProductInCartController,
+  purchaseCartController,
+} = require("../controllers/cart.controllers");
+const { sessionProtect } = require("../middlewares/auth.middlewares");
 
 const cartRouter = Router();
 
 //Cart Endpoints
-
+cartRouter.use(sessionProtect);
 //Agregar un producto al carrito del usuario (enviar productId y quantity por req.body)
 cartRouter.post("/add-product", setProductToCartController);
 

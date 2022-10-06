@@ -17,7 +17,6 @@ const ProductImgs = db.define("productImg", {
   },
   status: {
     type: DataTypes.STRING,
-    allowNull: false,
     defaultValue: "active",
   },
 });
