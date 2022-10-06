@@ -1,9 +1,12 @@
 const { Category } = require("../models/Category.model");
+const { AppError } = require("../utils/appError.util");
 const { catchAsync } = require("../utils/catchAsync.util");
 
 const getActiveCategoriesController = catchAsync(async (req, res, next) => {
-  const categories = await Category.findAll({ where: { status: "active" } });
-
+  const categories = await Category.findAll();
+  if (!categories) {
+    return next(new AppError("Not found categories", 404));
+  }
   res.status(200).json({
     status: "success",
     data: { categories },

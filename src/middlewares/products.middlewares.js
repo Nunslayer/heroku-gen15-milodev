@@ -1,5 +1,7 @@
 const { Category } = require("../models/Category.model");
 const { Product } = require("../models/Product.model");
+const { ProductImgs } = require("../models/ProductImgs.model");
+const { User } = require("../models/User.model");
 const { AppError } = require("../utils/appError.util");
 const { catchAsync } = require("../utils/catchAsync.util");
 
@@ -7,12 +9,15 @@ const productExistsMiddleware = catchAsync(async (req, res, next) => {
   const { id } = req.params;
 
   const product = await Product.findOne({
-    include: {
-      model: Category,
-    },
     where: {
       id,
+      status: "active",
     },
+    include: [
+      { model: Category, attributes: ["name"] },
+      { model: User, attributes: ["name", "email"] },
+      { model: ProductImgs },
+    ],
   });
   if (!product) {
     return next(new AppError("Product not found", 404));
